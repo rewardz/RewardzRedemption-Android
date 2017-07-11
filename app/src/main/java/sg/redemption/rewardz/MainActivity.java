@@ -7,6 +7,7 @@ import android.util.Log;
 import sg.lib.rewardz_redemption.retrofit.GlobalVariables;
 import sg.lib.rewardz_redemption.wrapper.RewardzRedemption;
 
+
 public class MainActivity extends AppCompatActivity implements RewardzRedemption.OnRewardsListListener, RewardzRedemption.OnRewardsRedeemed{
 
     private String oAuthToken = "Token 0e9a843aab22a8106c249b7b0b69d636a37de3e8";
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements RewardzRedemption
         setContentView(R.layout.activity_main);
 
         RewardzRedemption.getInstance(this, this, this).getRewardsList(oAuthToken, GlobalVariables.BASE_URL+GlobalVariables.REWARDS_API_URL);
-
 
     }
 

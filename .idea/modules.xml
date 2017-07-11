@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RewardzRedemption.iml" filepath="$PROJECT_DIR$/RewardzRedemption.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rewardz-redemption/rewardz-redemption.iml" filepath="$PROJECT_DIR$/rewardz-redemption/rewardz-redemption.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/rewardz-redemption/rewardz-redemption.iml" filepath="$PROJECT_DIR$/libs/rewardz-redemption/rewardz-redemption.iml" />
     </modules>
   </component>
 </project>

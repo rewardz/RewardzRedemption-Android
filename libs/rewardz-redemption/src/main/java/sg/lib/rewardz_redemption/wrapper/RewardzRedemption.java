@@ -1,8 +1,16 @@
 package sg.lib.rewardz_redemption.wrapper;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -42,7 +50,7 @@ public class RewardzRedemption implements RestCallback
 
     public void getRewardsList(String oAuthToken, String nextPageUrl)
     {
-        RestService.getInstance(mContext).getRewards(oAuthToken, nextPageUrl, new MyCallback<ResponseBody>(mContext,
+        RestService.getInstance(mContext).getRewards(oAuthToken, nextPageUrl, new MyCallback<String>(mContext,
                 this, true, "Loading Rewards...", GlobalVariables.SERVICE_MODE.REWARDS));
     }
 
@@ -73,10 +81,11 @@ public class RewardzRedemption implements RestCallback
                 onRewardsListListener.onRewardsListComplete(response.body().toString());
                 break;
             case REDEEM_REWARD:
-                onRewardsRedeemed.onRewardsRedeemed(response.body().toString());
+                onRewardsRedeemed.onRewardsRedeemed(new Gson().toJson(response.body()));
                 break;
         }
     }
+
 
 
 }

@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import sg.lib.rewardz_redemption.BuildConfig;
 
 /**
@@ -36,7 +37,7 @@ public class RestService {
     private RestService() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         if (BuildConfig.DEBUG) {
-            clientBuilder.addInterceptor(new ChuckInterceptor(mContext).showNotification(true));
+            //clientBuilder.addInterceptor(new ChuckInterceptor(mContext).showNotification(true));
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             clientBuilder.addInterceptor(httpLoggingInterceptor);
@@ -48,12 +49,13 @@ public class RestService {
             });
         }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         System.out.println("REST SERVICE BASE URL : "+ GlobalVariables.BASE_URL);
         String baseUrl = GlobalVariables.BASE_URL;
         restInterface = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(clientBuilder.build())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                 .build()
                 .create(RestInterface.class);
@@ -92,13 +94,13 @@ public class RestService {
 
 
 
-    public void getRewards(String token, String nextOrPrevUrl, MyCallback<ResponseBody> callback){
-        Call<ResponseBody> call = restInterface.getRewards(token, nextOrPrevUrl);
+    public void getRewards(String token, String nextOrPrevUrl, MyCallback<String> callback){
+        Call<String> call = restInterface.getRewards(token, nextOrPrevUrl);
         call.enqueue(callback);
     }
 
-    public void getAllRewards(String token, String nextOrPrevUrl, MyCallback<ResponseBody> callback){
-        Call<ResponseBody> call = restInterface.getAllRewards(token, nextOrPrevUrl);
+    public void getAllRewards(String token, String nextOrPrevUrl, MyCallback<String> callback){
+        Call<String> call = restInterface.getAllRewards(token, nextOrPrevUrl);
         call.enqueue(callback);
     }
 

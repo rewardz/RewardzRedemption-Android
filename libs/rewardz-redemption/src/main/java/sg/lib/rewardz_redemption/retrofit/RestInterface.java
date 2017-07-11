@@ -22,10 +22,10 @@ public interface RestInterface {
 
 
     @GET
-    Call<ResponseBody> getRewards(@Header("Authorization") String token, @Url String nextOrPrevUrl);
+    Call<String> getRewards(@Header("Authorization") String token, @Url String nextOrPrevUrl);
 
     @GET
-    Call<ResponseBody> getAllRewards(@Header("Authorization") String token, @Url String nextOrPrevUrl);
+    Call<String> getAllRewards(@Header("Authorization") String token, @Url String nextOrPrevUrl);
 
     @FormUrlEncoded
     @POST(GlobalVariables.REDEEM_REWARD_API_URL)

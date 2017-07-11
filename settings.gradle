@@ -1,1 +1,3 @@
-include ':app', ':rewardz-redemption'
+include ':app'
+include ':rewardz-redemption'
+project(':rewardz-redemption').projectDir = new File('libs/rewardz-redemption')
