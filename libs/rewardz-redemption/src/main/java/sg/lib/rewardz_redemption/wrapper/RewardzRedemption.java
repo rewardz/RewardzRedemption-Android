@@ -48,9 +48,10 @@ public class RewardzRedemption implements RestCallback
         return rewardzRedemption;
     }
 
-    public void getRewardsList(String oAuthToken, String nextPageUrl)
+    public void getRewardsList(String oAuthToken)
     {
-        RestService.getInstance(mContext).getRewards(oAuthToken, nextPageUrl, new MyCallback<String>(mContext,
+        String url = GlobalVariables.BASE_URL + GlobalVariables.REWARDS_API_URL;
+        RestService.getInstance(mContext).getRewards(oAuthToken, url , new MyCallback<String>(mContext,
                 this, true, "Loading Rewards...", GlobalVariables.SERVICE_MODE.REWARDS));
     }
 

@@ -3,8 +3,6 @@ package sg.redemption.rewardz;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
-import sg.lib.rewardz_redemption.retrofit.GlobalVariables;
 import sg.lib.rewardz_redemption.wrapper.RewardzRedemption;
 
 
@@ -17,13 +15,15 @@ public class MainActivity extends AppCompatActivity implements RewardzRedemption
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RewardzRedemption.getInstance(this, this, this).getRewardsList(oAuthToken, GlobalVariables.BASE_URL+GlobalVariables.REWARDS_API_URL);
+        RewardzRedemption.getInstance(this, this, this).getRewardsList(oAuthToken);
 
     }
 
     @Override
     public void onRewardsListComplete(String jsonResponse) {
         Log.v("Tag", "onRewardsListComplete ==> "+jsonResponse);
+
+
     }
 
     @Override
