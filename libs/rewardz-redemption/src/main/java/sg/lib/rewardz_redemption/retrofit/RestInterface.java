@@ -20,6 +20,9 @@ import retrofit2.http.Url;
  */
 public interface RestInterface {
 
+    @FormUrlEncoded
+    @POST(GlobalVariables.LOGIN_API_URL)
+    Call<String> login(@FieldMap Map<String, String> map);
 
     @GET
     Call<String> getRewards(@Header("Authorization") String token, @Url String nextOrPrevUrl);

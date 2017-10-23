@@ -93,6 +93,11 @@ public class RestService {
     }
 
 
+    public void getAuthToken(Map<String, String> map, MyCallback<String> callback) {
+
+        Call<String> call = restInterface.login(map);
+        call.enqueue(callback);
+    }
 
     public void getRewards(String token, String nextOrPrevUrl, MyCallback<String> callback){
         Call<String> call = restInterface.getRewards(token, nextOrPrevUrl);

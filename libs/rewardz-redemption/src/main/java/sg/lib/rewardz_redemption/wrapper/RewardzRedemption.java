@@ -29,6 +29,10 @@ public class RewardzRedemption implements RestCallback
 {
     private static Context mContext;
     private static RewardzRedemption rewardzRedemption;
+    private static OnAuthTokenListener onAuthTokenListener;
+    public interface OnAuthTokenListener{
+        void onAuthTokenReceive(String jsonResponse);
+    }
     private static OnRewardsListListener onRewardsListListener;
     public interface OnRewardsListListener{
         void onRewardsListComplete(String jsonResponse);
@@ -38,14 +42,27 @@ public class RewardzRedemption implements RestCallback
         void onRewardsRedeemed(String jsonResponse);
     }
 
+
+    private RewardzRedemption()
+    {
+
+    }
+
     public static RewardzRedemption getInstance(Context context, OnRewardsListListener onRewardsListListener, OnRewardsRedeemed onRewardsRedeemed)
     {
         if(rewardzRedemption == null)
             rewardzRedemption = new RewardzRedemption();
+        //RewardzRedemption.onAuthTokenListener = onAuthTokenListener;
         RewardzRedemption.onRewardsListListener = onRewardsListListener;
         RewardzRedemption.onRewardsRedeemed = onRewardsRedeemed;
         RewardzRedemption.mContext = context;
         return rewardzRedemption;
+    }
+
+    public void getAuthToken(HashMap<String, String> mapCredentials)
+    {
+        RestService.getInstance(mContext).getAuthToken(mapCredentials, new MyCallback<String>(mContext,
+                this, true, "Getting token...", GlobalVariables.SERVICE_MODE.AUTH_TOKEN_RECEIVE));
     }
 
     public void getRewardsList(String oAuthToken)
@@ -82,7 +99,10 @@ public class RewardzRedemption implements RestCallback
                 onRewardsListListener.onRewardsListComplete(response.body().toString());
                 break;
             case REDEEM_REWARD:
-                onRewardsRedeemed.onRewardsRedeemed(new Gson().toJson(response.body()));
+                onRewardsRedeemed.onRewardsRedeemed(response.body().toString());
+                break;
+            case AUTH_TOKEN_RECEIVE:
+                onAuthTokenListener.onAuthTokenReceive(response.body().toString());
                 break;
         }
     }

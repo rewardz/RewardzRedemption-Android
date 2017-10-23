@@ -39,4 +39,12 @@ dependencies {
     // Add Module Dependency
     compile project(':rewardz-redemption')
 
+    // GLide lib for loading image
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+
+    // Recycler View
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+
+
+
 }
