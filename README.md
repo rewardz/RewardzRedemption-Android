@@ -26,7 +26,7 @@ Add the JitPack repository to your build file
 ## Step 2.
 Add this in your build.gradle
 
-`compile 'com.github.rewardz:RewardzRedemption-Android:0.1.2'`
+`compile 'com.github.rewardz:RewardzRedemption-Android:0.1.3'`
 
 ## Step 3.
 Sync gradle.
